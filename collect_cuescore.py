@@ -67,8 +67,10 @@ def fetch(tid):
     """Tournament row:
     [id, name, start date, discipline, default race, default best-of-sets, handicap 1/0, type, city, owner, matches listed,
      matches stored, country (lower case), venue/club, status, stop date]
-    Match row: [tournament id, match id, player A, player B, score A, score B, race, date, round, penalty, game, best-of-sets, match status]"""
+    Match row: [tournament id, match id, player A, player B, score A, score B, race, date, round, penalty, game, best-of-sets, match status]
+    Player row: [first name, last name, flag (alpha3), club or country represented, lives in, date of the event the club is from]"""
     j = get(f'{API}/tournament/?id={tid}').json()
+    tday = (j.get('starttime') or '')[:10]   # event date: which club a player represented most recently
     ms, nm = [], 0
     for m in j.get('matches') or []:
         nm += 1
@@ -79,12 +81,17 @@ def fetch(tid):
         except Exception: continue
         for p in (a, b):
             pid = str(p['playerId'])
+            rep = p.get('represents'); club = (rep.get('alpha3') or rep.get('name')) if isinstance(rep, dict) else ''
             if pid not in cs['players']:
                 cc = (p.get('country') or {}).get('alpha3', '') if isinstance(p.get('country'), dict) else ''
-                rep = p.get('represents'); lv = p.get('livesIn')
-                cs['players'][pid] = [p.get('firstname'), p.get('lastname'), cc,
-                                      (rep.get('alpha3') or rep.get('name')) if isinstance(rep, dict) else '',
-                                      (lv.get('alpha3') or lv.get('name')) if isinstance(lv, dict) else '']
+                lv = p.get('livesIn')
+                cs['players'][pid] = [p.get('firstname'), p.get('lastname'), cc, club,
+                                      (lv.get('alpha3') or lv.get('name')) if isinstance(lv, dict) else '', tday]
+            else:
+                # 22 Nov 2026 (Estonian rating, club filter): keep the club from the newest event the player played in
+                row = cs['players'][pid]
+                if len(row) < 6: row.append('')
+                if club and tday and tday >= (row[5] or ''): row[3] = club; row[5] = tday
         ms.append([j['tournamentId'], m['matchId'], a['playerId'], b['playerId'], sa, sb, m.get('raceTo') or 0,
                    (m.get('stoptime') or m.get('starttime') or '')[:10], m.get('roundName') or '', m.get('penalty') or 0,
                    m.get('discipline') or '', m.get('bestOfSets') or 0, m.get('matchstatus') or ''])

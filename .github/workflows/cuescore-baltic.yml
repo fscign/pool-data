@@ -1,0 +1,33 @@
+# CueScore Baltics: Estonia, Latvia and Lithuania in one collector (one Run button). Added 22 Nov 2026 for the Estonian rating.
+# Same as CueScore Nordic: each country runs as its own parallel job and keeps its own files.
+# First run reads every pool event since 2016 (8/9/10-ball and straight pool; handicap events included, flagged in the data);
+# a run cut off by the time limit continues where it stopped on the next run.
+# The Latvian repo still has its own CueScore collection for now; it moves to these files in its next release.
+name: CueScore Baltics
+on:
+  schedule:
+    - cron: '19 3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cuescore-baltic
+  cancel-in-progress: false
+jobs:
+  collect:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {cc: ee, country: Estonia}
+          - {cc: lv, country: Latvia}
+          - {cc: lt, country: Lithuania}
+    uses: ./.github/workflows/collect.yml
+    with:
+      name: cuescore_${{ matrix.cc }}
+      scripts: collect_cuescore.py collect_team.py
+      files: ${{ matrix.cc }}_cuescore_raw.json.gz ${{ matrix.cc }}_team_raw.json
+      country: ${{ matrix.country }}
+      cs_file: data/${{ matrix.cc }}_cuescore_raw.json.gz
+      team_file: data/${{ matrix.cc }}_team_raw.json
+    secrets: inherit

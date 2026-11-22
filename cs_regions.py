@@ -7,7 +7,7 @@ Aleksandrs 13 Nov 2026: new regions gather only 8-ball, 9-ball, 10-ball and stra
 """
 import os, re, time
 
-# Collected elsewhere: one workflow per country / CueScore Nordic in this repo; Latvia, Lithuania, Estonia in the Latvian repo.
+# Collected elsewhere: one workflow per country / CueScore Nordic / CueScore Baltics (Estonia, Latvia, Lithuania; added 22 Nov 2026) in this repo.
 COLLECTED = ['Germany', 'Poland', 'Czech Republic', 'Netherlands', 'Belgium', 'Luxembourg', 'Austria', 'Switzerland',
              'Italy', 'France', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Latvia', 'Lithuania', 'Estonia']
 REGIONS = {

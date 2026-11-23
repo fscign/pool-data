@@ -35,3 +35,10 @@ One workflow per source and per CueScore country (each can be run on its own wit
 If one source fails, the others are not affected.
 Collectors were moved here on 9 Nov 2026 from german-pool-rating, polish-pool-rating, benelux-pool-rating (this repo,
 renamed) and latvian-pool-rating (EPBF, Matchroom, PBS).
+
+
+## Shared rating rules
+`rules/score_rules.py`: score and event rules every rating build uses (walkovers written as a score, short scores raised to
+the race, odd-format, handicap-by-name and test/money events; Aleksandrs 22-23 Nov 2026). Builds download it from
+https://raw.githubusercontent.com/fscign/pool-data/main/rules/score_rules.py, so a fix here reaches every rating.
+Used by: Estonian rating. Latvian, German and Polish ratings adopt it when they move over (their numbers will change).

@@ -173,6 +173,46 @@ def update():
     new, upd = run(todo)
     say(f'CueScore: {new} new events, {upd} recent ones re-read')
 
+BPL = r'baltic pool (league|tour)'
+def player_sweep():
+    """Baltic countries (23 Nov 2026): events whose organizer has no country (e.g. Baltic Billiards Development Union, which runs
+    the BPL) and events without a venue country never show in the country listing. Like the Latvian collector: read the profile
+    pages of players active here in the last 90 days (each shows the player's latest events) and add unknown pool events held in
+    this country, without a country, or BPL events; BPL sister divisions are found through the event page."""
+    if COUNTRY not in ('Estonia', 'Latvia', 'Lithuania'): return
+    recent = (TODAY - datetime.timedelta(days=90)).isoformat()
+    rt = {t[0] for t in cs['tournaments'] if (t[2] or '') >= recent}
+    pids = sorted({str(p) for m in cs['matches'] if m[0] in rt for p in (m[2], m[3])})
+    checked = set(cs.setdefault('checked', []))
+    def page(u):
+        for i in range(2):
+            try: return requests.get(u, timeout=40, headers={'User-Agent': 'Mozilla/5.0'}).text
+            except Exception: time.sleep(3)
+        return ''
+    with ThreadPoolExecutor(8) as ex: pages = list(ex.map(page, [f'https://cuescore.com/player/x/{p}' for p in pids]))
+    queue = sorted({int(x) for h in pages for x in re.findall(r'/tournament/[^"]*?/(\d+)"', h)} - have - checked)
+    seen, add = set(), []
+    while queue:
+        tid = queue.pop(0)
+        if tid in seen: continue
+        seen.add(tid)
+        try: j = get(f'{API}/tournament/?id={tid}').json()
+        except Exception: continue
+        if j.get('status') != 'Finished': continue   # not finished: looked at again next time
+        name = j.get('name') or ''
+        v = (j.get('venues') or [{}])[0] or {}
+        vc = v.get('country'); vc = ((vc.get('name') if isinstance(vc, dict) else vc) or '').lower()
+        oc = (j.get('owner') or {}).get('country'); oc = ((oc.get('name') if isinstance(oc, dict) else oc) or '').lower()
+        bpl = bool(re.search(BPL, name, re.I))
+        if bpl:
+            h = page(f'https://cuescore.com/tournament/x/{tid}')
+            queue += [int(i) for sl, i in re.findall(r'/tournament/([^"/]*)/(\d+)"', h) if re.search(BPL, sl.replace('+', ' '), re.I) and int(i) not in have and int(i) not in seen]
+        mine = vc == COUNTRY.lower() or (vc == '' and oc in ('', COUNTRY.lower())) or (bpl and vc in ('', COUNTRY.lower()))
+        if mine and POOL.match(j.get('discipline') or ''): add.append(tid)
+        else: cs['checked'].append(tid)
+    new, upd = run(add, 4) if add else (0, 0)
+    say(f'CueScore player pages ({COUNTRY}): {len(pids)} players, {len(seen)} unknown events looked at, {new} added')
+
 if __name__ == '__main__':
     os.makedirs('data', exist_ok=True)
     COUNTRIES = R.countries(get, 'Germany')
@@ -180,5 +220,7 @@ if __name__ == '__main__':
         say(f'Region {R.REGION}: {len(COUNTRIES)} countries'); backfill_region()
     else: backfill()
     update()
+    try: player_sweep()
+    except Exception as e: say(f'player sweep failed: {e}')
     save()
     open('update_log.txt', 'a').write('\n'.join(log) + '\n')

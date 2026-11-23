@@ -5,7 +5,7 @@ Pure Python, no other files needed.
 
 Use:
     import score_rules as SR
-    SR.name_handicap(name)                 -> reason or None   (event names that mean handicap)
+    SR.name_handicap(name, organizer, date) -> reason or None  (handicap by name or known organizer rule)
     rules = SR.ScoreRules(events, format_ok)
         events: {event_id: {'name': str, 'per_match_race': bool,
                             'matches': [(match_id, round_name, stored_race, (score_a, score_b)), ...]}}
@@ -43,8 +43,17 @@ FINAL = re.compile(r'^\s*(final|finals|fināls|finalas|finaal|finale)\s*$', re.I
 TEST_OR_MONEY = re.compile(r'test|money', re.I)
 
 
-def name_handicap(name):
-    return 'handicap (Baribal Monday, Baribal HC or "fora" in the name)' if HANDICAP_NAME.search(name or '') else None
+# Events known to be played with handicap although CueScore does not say so in its data (Aleksandrs 23 Nov 2026):
+# every Monday event of Hill Hill Billiard Cafe (Tallinn) since 2019.
+HILL_HILL = re.compile(r'hill\s*hill', re.I)
+
+
+def name_handicap(name, organizer='', date=None):
+    """Reason if the event is handicap by its name or by a known organizer rule, else None. date: datetime.date (optional)."""
+    if HANDICAP_NAME.search(name or ''): return 'handicap (Baribal Monday, Baribal HC or "fora" in the name)'
+    if date is not None and date.weekday() == 0 and (HILL_HILL.search(organizer or '') or HILL_HILL.search(name or '')):
+        return 'handicap (Hill Hill Monday event)'
+    return None
 
 
 def _mode(c):

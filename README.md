@@ -41,4 +41,4 @@ renamed) and latvian-pool-rating (EPBF, Matchroom, PBS).
 `rules/score_rules.py`: score and event rules every rating build uses (walkovers written as a score, short scores raised to
 the race, odd-format, handicap-by-name and test/money events; Aleksandrs 22-23 Nov 2026). Builds download it from
 https://raw.githubusercontent.com/fscign/pool-data/main/rules/score_rules.py, so a fix here reaches every rating.
-Used by: Estonian rating. Latvian, German and Polish ratings adopt it when they move over (their numbers will change).
+Used by: Estonian rating. Also: data/baltic_extra_cuescore_raw.json.gz and data/baltic_extra_ts_raw.json.gz = events only the Latvian repo had (BPL Final Vilnius 2025, POOL8TV 2013-2014, 8me 2016, 32 TS events incl. Lithuanian championships 2018), copied 23 Nov 2026; collect_cuescore.py now also reads Baltic players' profile pages to find events whose organizer has no country. Latvian, German and Polish ratings adopt it when they move over (their numbers will change).

@@ -1,0 +1,26 @@
+# DigitalPool (digitalpool.com): matches of Estonian players, see collect_digitalpool.py. Added 27 Nov 2026.
+name: DigitalPool
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Read all years again (slow), instead of the last 60 days'
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: digitalpool
+  cancel-in-progress: false
+jobs:
+  collect:
+    uses: ./.github/workflows/collect.yml
+    with:
+      name: digitalpool
+      scripts: collect_digitalpool.py
+      files: digitalpool_raw.json.gz
+      args: ${{ inputs.full && '--full' || '' }}
+      minutes: 60
+    secrets: inherit

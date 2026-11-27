@@ -1,0 +1,412 @@
+{
+"countries": [
+"EE",
+"EST",
+"Estonia",
+"ee",
+"est"
+],
+"names": [
+[
+"Denis Grabe",
+"Denis",
+"Grabe"
+],
+[
+"Mark Mägi",
+"Mark",
+"M_gi"
+],
+[
+"Karl Gnadeberg",
+"Karl",
+"Gnadeberg"
+],
+[
+"Mihkel Rehepapp",
+"Mihkel",
+"Rehepapp"
+],
+[
+"Raimo Teesaar",
+"Raimo",
+"Teesaar"
+],
+[
+"Erki Erm",
+"Erki",
+"Erm"
+],
+[
+"Rafig Adigazalov",
+"Rafig",
+"Adigazalov"
+],
+[
+"Gert Maimre",
+"Gert",
+"Maimre"
+],
+[
+"Joonas Saska",
+"Joonas",
+"Saska"
+],
+[
+"Rainer Laar",
+"Rainer",
+"Laar"
+],
+[
+"Revo Maimre",
+"Revo",
+"Maimre"
+],
+[
+"Oliver Lepp",
+"Oliver",
+"Lepp"
+],
+[
+"Aleksandr Jermikimov",
+"Aleksandr",
+"Jermikimov"
+],
+[
+"Stanislav Saiov",
+"Stanislav",
+"Saiov"
+],
+[
+"Sander Kont",
+"Sander",
+"Kont"
+],
+[
+"Kait Hinn",
+"Kait",
+"Hinn"
+],
+[
+"Juss Saska",
+"Juss",
+"Saska"
+],
+[
+"Illimar Ventsel",
+"Illimar",
+"Ventsel"
+],
+[
+"Eltsin Zabitov",
+"Eltsin",
+"Zabitov"
+],
+[
+"Sander Tamm",
+"Sander",
+"Tamm"
+],
+[
+"Tauri Imsi",
+"Tauri",
+"Imsi"
+],
+[
+"Mario Palumets",
+"Mario",
+"Palumets"
+],
+[
+"Maario Hussar",
+"Maario",
+"Hussar"
+],
+[
+"Kristjan Kama",
+"Kristjan",
+"Kama"
+],
+[
+"Simo Saarniit",
+"Simo",
+"Saarniit"
+],
+[
+"Mikk Pettai",
+"Mikk",
+"Pettai"
+],
+[
+"Gert Gnadeberg",
+"Gert",
+"Gnadeberg"
+],
+[
+"Henrik-Johann Ligi",
+"Henrik-Johann",
+"Ligi"
+],
+[
+"Tauno Markovskis",
+"Tauno",
+"Markovskis"
+],
+[
+"Mirko Raid",
+"Mirko",
+"Raid"
+],
+[
+"Rein Luik",
+"Rein",
+"Luik"
+],
+[
+"Kaupo Saarmann",
+"Kaupo",
+"Saarmann"
+],
+[
+"Philip Tšunihhin",
+"Philip",
+"T_unihhin"
+],
+[
+"Reimo Simsalu",
+"Reimo",
+"Simsalu"
+],
+[
+"Marcus Aarde",
+"Marcus",
+"Aarde"
+],
+[
+"Maksim Pinchuk",
+"Maksim",
+"Pinchuk"
+],
+[
+"Artur Okspuu",
+"Artur",
+"Okspuu"
+],
+[
+"Erki Lehtpuu",
+"Erki",
+"Lehtpuu"
+],
+[
+"Georg Grossthal",
+"Georg",
+"Grossthal"
+],
+[
+"Denis Sokolov",
+"Denis",
+"Sokolov"
+],
+[
+"Tarvo Piip",
+"Tarvo",
+"Piip"
+],
+[
+"Mattias Marvet",
+"Mattias",
+"Marvet"
+],
+[
+"Kristjan Kuusik",
+"Kristjan",
+"Kuusik"
+],
+[
+"Nikita Smirnov",
+"Nikita",
+"Smirnov"
+],
+[
+"Karl Mihkelson",
+"Karl",
+"Mihkelson"
+],
+[
+"Gert Jürgenson",
+"Gert",
+"J_rgenson"
+],
+[
+"Roman Kuzemko",
+"Roman",
+"Kuzemko"
+],
+[
+"Marko Kurs",
+"Marko",
+"Kurs"
+],
+[
+"Romeo-Rio Riigov",
+"Romeo-Rio",
+"Riigov"
+],
+[
+"Ivo Puhm",
+"Ivo",
+"Puhm"
+],
+[
+"Ilja Ladoškin",
+"Ilja",
+"Lado_kin"
+],
+[
+"Agris Stüf",
+"Agris",
+"St_f"
+],
+[
+"Karel Kaarna",
+"Karel",
+"Kaarna"
+],
+[
+"Rain Lepikmäe",
+"Rain",
+"Lepikm_e"
+],
+[
+"Margus Lipsik",
+"Margus",
+"Lipsik"
+],
+[
+"Aleksei Hanin",
+"Aleksei",
+"Hanin"
+],
+[
+"Renar-Ken Riidak",
+"Renar-Ken",
+"Riidak"
+],
+[
+"Timo Kera",
+"Timo",
+"Kera"
+],
+[
+"Rommy Pang",
+"Rommy",
+"Pang"
+],
+[
+"Fred Martmaa",
+"Fred",
+"Martmaa"
+],
+[
+"Harry Ventsel",
+"Harry",
+"Ventsel"
+],
+[
+"Rauno Rüütel",
+"Rauno",
+"R__tel"
+],
+[
+"Rene Kivila",
+"Rene",
+"Kivila"
+],
+[
+"Ervin Solodilov",
+"Ervin",
+"Solodilov"
+],
+[
+"Kevin Kattai",
+"Kevin",
+"Kattai"
+],
+[
+"Matis Pill",
+"Matis",
+"Pill"
+],
+[
+"Silver Lätt",
+"Silver",
+"L_tt"
+],
+[
+"Margus Vaher",
+"Margus",
+"Vaher"
+],
+[
+"Rene Pärnpuu",
+"Rene",
+"P_rnpuu"
+],
+[
+"Ilja Kotlov",
+"Ilja",
+"Kotlov"
+],
+[
+"Oleg Sidorov",
+"Oleg",
+"Sidorov"
+],
+[
+"Denis Zheleznyakov",
+"Denis",
+"Zheleznyakov"
+],
+[
+"Priit Pajumaa",
+"Priit",
+"Pajumaa"
+],
+[
+"Nils Luhavee",
+"Nils",
+"Luhavee"
+],
+[
+"Dmitri Tšurakov",
+"Dmitri",
+"T_urakov"
+],
+[
+"Timo Volmer",
+"Timo",
+"Volmer"
+],
+[
+"Raimond Vatko",
+"Raimond",
+"Vatko"
+],
+[
+"Gunnar Pleer",
+"Gunnar",
+"Pleer"
+],
+[
+"Kalev-Johannes Ruus",
+"Kalev-Johannes",
+"Ruus"
+],
+[
+"Marek Jänesmäe",
+"Marek",
+"J_nesm_e"
+]
+],
+"note": "Estonian players searched on DigitalPool by name (top 80 by rating with 300+ racks, 27 Nov 2026), plus anyone with an Estonian flag"
+}

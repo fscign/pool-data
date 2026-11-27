@@ -9,7 +9,8 @@ Who is searched: data/digitalpool_search.json
   names: [full name, first-name pattern, surname pattern]; '_' stands for one letter with an accent (Mägi -> M_gi)
 
 Output data/digitalpool_raw.json.gz:
-  tournaments: {id: [name, start date, game_type, tournament_type, venue name, venue country, is_test, handicap_format]}
+  tournaments: {id: [name, start date, game_type, tournament_type, venue name, venue country, is_test, handicap_format, slug]}
+               (the page is digitalpool.com/tournaments/<slug>; the numeric id does not open)
   matches:     {bracket id: [tournament id, round, match no, name 1, flag 1, score 1, race 1, forfeit 1,
                              name 2, flag 2, score 2, race 2, forfeit 2, bye, status, start date]}
   full_read: date of the last full read
@@ -31,7 +32,7 @@ since = None if full else (datetime.date.today() - datetime.timedelta(days=60)).
 FIELDS = '''id round match_number challenger1_name challenger2_name challenger1_country challenger2_country
  challenger1_score challenger2_score challenger1_race_to challenger2_race_to challenger1_is_forfeit challenger2_is_forfeit
  is_bye status start_time tournament_id
- tournament { id name game_type start_date_time is_test tournament_type handicap_format venue { name country } }'''
+ tournament { id slug name game_type start_date_time is_test tournament_type handicap_format venue { name country } }'''
 
 
 def query(where):
@@ -53,7 +54,7 @@ def keep(rows):
     for m in rows:
         t = m['tournament'] or {}; v = t.get('venue') or {}
         D['tournaments'][str(t.get('id'))] = [t.get('name'), (t.get('start_date_time') or '')[:10], t.get('game_type'),
-                                              t.get('tournament_type'), v.get('name'), v.get('country'), t.get('is_test'), t.get('handicap_format')]
+                                              t.get('tournament_type'), v.get('name'), v.get('country'), t.get('is_test'), t.get('handicap_format'), t.get('slug')]
         new = [m['tournament_id'], m['round'], m['match_number'],
                m['challenger1_name'], m['challenger1_country'], m['challenger1_score'], m['challenger1_race_to'], bool(m['challenger1_is_forfeit']),
                m['challenger2_name'], m['challenger2_country'], m['challenger2_score'], m['challenger2_race_to'], bool(m['challenger2_is_forfeit']),
